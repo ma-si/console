@@ -1,0 +1,89 @@
+{
+    "name": "aist/console",
+    "description": "Console",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "console",
+        "cli"
+    ],
+    "authors": [
+        {
+            "name": "MaSi",
+            "email": "webdeveloper@mateuszsitek.com",
+            "homepage": "http://mateuszsitek.com",
+            "role": "Author"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "zf": {
+            "component": "Aist\\Console",
+            "config-provider": "Aist\\Console\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "container-interop/container-interop": "^1.2",
+        "symfony/console": "^3.0 || ^2.8"
+    },
+    "require-dev": {
+        "malukenho/docheader": "^0.1.5",
+        "mikey179/vfsStream": "^1.6.4",
+        "mmoreram/php-formatter": "^1.3",
+        "mockery/mockery": "^0.9.8",
+        "php-mock/php-mock-phpunit": "^2.0 || ^1.1.2",
+        "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+        "satooshi/php-coveralls": "^1.0",
+        "symfony/var-dumper": "^3.3",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "autoload": {
+      "psr-4": {
+        "Aist\\Console\\": "src/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Test\\Aist\\Console\\": "test/"
+      }
+    },
+    "bin": [
+        "bin/console"
+    ],
+    "scripts": {
+        "post-update-cmd": [
+        ],
+        "header-fix": [
+            "php-formatter formatter:header:fix src",
+            "php-formatter formatter:header:fix test"
+        ],
+        "header-check": [
+            "docheader check src",
+            "docheader check test"
+        ],
+        "use-sort": [
+            "php-formatter formatter:use:sort src",
+            "php-formatter formatter:use:sort test"
+        ],
+        "check": [
+            "@header-check",
+            "@cs-check"
+        ],
+        "fix": [
+            "@header-fix",
+            "@use-sort",
+            "@cs-fix"
+        ],
+        "test": "phpunit --colors=always",
+        "cs-check": "phpcs --colors",
+        "cs-fix": "phpcbf --colors",
+        "test-coverage": "phpunit --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
+    }
+}
